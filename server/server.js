@@ -1,21 +1,16 @@
 require('dotenv').config();
 const express = require('express');
-const mysql = require('mysql2/promise');
-
 const app = express();
 app.use(express.json());
 
-// 建立 DB 連線 Pool
-const pool = mysql.createPool({
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
-  connectionLimit: 10,
-});
+// 載入資料庫連線池
+const pool = require('./db');
 
-// 測試連線用 endpoint
+// 載入認證路由
+const authRouter = require('./routes/auth');
+app.use('/api/auth', authRouter);
+
+// 測試資料庫連線用 endpoint
 app.get('/api/health', async (req, res) => {
   try {
     const [rows] = await pool.query('SELECT 1+1 AS result');
