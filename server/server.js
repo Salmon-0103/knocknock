@@ -10,6 +10,9 @@ const pool = require('./db');
 const authRouter = require('./routes/auth');
 app.use('/api/auth', authRouter);
 
+const postsRouter = require('./routes/posts');
+app.use('/api/posts', postsRouter);
+
 // 測試資料庫連線用 endpoint
 app.get('/api/health', async (req, res) => {
   try {
