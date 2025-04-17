@@ -1,0 +1,13 @@
+# Node modules
+/client/node_modules/
+/server/node_modules/
+
+# 環境變數
+/client/.env
+/server/.env
+
+# VSCode
+.vscode/
+
+# Mac
+.DS_Store
