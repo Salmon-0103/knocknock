@@ -4,6 +4,7 @@ const auth    = require('../middleware/auth');
 const router  = express.Router();
 
 // 1. 新增貼文
+// POST   /api/posts
 router.post('/', auth, async (req, res) => {
   const { title, content, imageUrl } = req.body;
   try {
@@ -11,14 +12,15 @@ router.post('/', auth, async (req, res) => {
       'INSERT INTO posts (user_id, title, content, image_url) VALUES (?, ?, ?, ?)',
       [req.user.id, title, content, imageUrl || null]
     );
-    res.status(201).json({ message: '貼文已新增', postId: result.insertId });
+    res.status(201).json({ message: '新增成功', postId: result.insertId });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: '新增貼文失敗' });
+    res.status(500).json({ error: '新增失敗' });
   }
 });
 
 // 2. 取得貼文列表（最新在前）
+// GET    /api/posts
 router.get('/', async (req, res) => {
   try {
     const [posts] = await pool.query(`
@@ -37,6 +39,7 @@ router.get('/', async (req, res) => {
 });
 
 // 3. 取得單一貼文（含留言與按讚數）
+// GET    /api/posts/:id
 router.get('/:id', async (req, res) => {
   const postId = req.params.id;
   try {
@@ -74,6 +77,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // 4. 編輯自己的貼文
+// PUT    /api/posts/:id
 router.put('/:id', auth, async (req, res) => {
   const postId = req.params.id;
   const { title, content, imageUrl } = req.body;
@@ -102,6 +106,7 @@ router.put('/:id', auth, async (req, res) => {
 });
 
 // 5. 刪除自己的貼文
+// DELETE /api/posts/:id 
 router.delete('/:id', auth, async (req, res) => {
   const postId = req.params.id;
   try {
