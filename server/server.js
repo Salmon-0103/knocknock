@@ -23,8 +23,10 @@ const commentsRouter = require('./routes/comments');
 app.use('/api/posts/:postId/comments', commentsRouter);
 
 // 按讚
-// const likesRouter = require('./routes/likes');
-// app.use('/api/posts/:postId/likes', likesRouter);
+const likesRouter = require('./routes/likes');
+app.use('/api/posts/:postId/likes', likesRouter);
+
+
 
 // 測試資料庫連線用 endpoint
 app.get('/api/health', async (req, res) => {

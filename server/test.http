@@ -60,3 +60,42 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZ
 ### 刪除貼文（第1篇）Delete Post
 DELETE http://localhost:3001/api/posts/2
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidGVzdHVzZXIiLCJpYXQiOjE3NDQ5NjE0NDIsImV4cCI6MTc0NTA0Nzg0Mn0.pg0RevkW5Ki-zTqMqkJJs2gY7bEjBY8PLRBL9zfYYMs
+
+
+### 建立留言 Create Comment
+
+POST http://localhost:3001/api/posts/3/comments
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidGVzdHVzZXIiLCJpYXQiOjE3NDQ5NjE0NDIsImV4cCI6MTc0NTA0Nzg0Mn0.pg0RevkW5Ki-zTqMqkJJs2gY7bEjBY8PLRBL9zfYYMs
+
+{
+"content": "這是一則測試留言"
+}
+
+### 列出留言 List Comments
+
+GET http://localhost:3001/api/posts/3/comments
+
+### 刪除留言 Delete Comment
+
+DELETE http://localhost:3001/api/posts/3/comments/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidGVzdHVzZXIiLCJpYXQiOjE3NDQ5NjE0NDIsImV4cCI6MTc0NTA0Nzg0Mn0.pg0RevkW5Ki-zTqMqkJJs2gY7bEjBY8PLRBL9zfYYMs
+
+### 再次列出留言 List Comments (確認是否刪除)
+
+GET http://localhost:3001/api/posts/3/comments
+
+### 按讚
+POST http://localhost:3001/api/posts/3/likes
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidGVzdHVzZXIiLCJpYXQiOjE3NDQ5NjE0NDIsImV4cCI6MTc0NTA0Nzg0Mn0.pg0RevkW5Ki-zTqMqkJJs2gY7bEjBY8PLRBL9zfYYMs
+
+### 查詢讚數與是否已讚 Get Like Status
+
+GET http://localhost:3001/api/posts/3/likes
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidGVzdHVzZXIiLCJpYXQiOjE3NDQ5NjE0NDIsImV4cCI6MTc0NTA0Nzg0Mn0.pg0RevkW5Ki-zTqMqkJJs2gY7bEjBY8PLRBL9zfYYMs
+
+### 取消讚 Remove Like
+
+DELETE http://localhost:3001/api/posts/1/likes
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidGVzdHVzZXIiLCJpYXQiOjE3NDQ5NjE0NDIsImV4cCI6MTc0NTA0Nzg0Mn0.pg0RevkW5Ki-zTqMqkJJs2gY7bEjBY8PLRBL9zfYYMs
+
