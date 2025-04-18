@@ -1,0 +1,62 @@
+### 註冊 Register
+POST http://localhost:3001/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "email": "test@example.com",
+  "password": "123456"
+}
+
+###
+
+### 登入 Login（執行後複製回傳的 token）
+POST http://localhost:3001/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "123456"
+}
+
+###
+
+### 建立貼文 Create Post（請把 <token> 換成實際複製的 JWT）
+POST http://localhost:3001/api/posts
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidGVzdHVzZXIiLCJpYXQiOjE3NDQ5NjE0NDIsImV4cCI6MTc0NTA0Nzg0Mn0.pg0RevkW5Ki-zTqMqkJJs2gY7bEjBY8PLRBL9zfYYMs
+
+{
+  "title": "測試貼文",
+  "content": "這是用 REST Client 建立的貼文",
+  "imageUrl": null
+}
+
+###
+
+### 取得所有貼文 List Posts
+GET http://localhost:3001/api/posts
+
+###
+
+### 取得單一貼文（第1篇）Get Single Post
+GET http://localhost:3001/api/posts/1
+
+###
+
+### 更新貼文（第1篇）Update Post
+PUT http://localhost:3001/api/posts/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidGVzdHVzZXIiLCJpYXQiOjE3NDQ5NjE0NDIsImV4cCI6MTc0NTA0Nzg0Mn0.pg0RevkW5Ki-zTqMqkJJs2gY7bEjBY8PLRBL9zfYYMs
+
+{
+  "title": "更新後的標題",
+  "content": "內容被更新了！",
+  "imageUrl": null
+}
+
+###
+
+### 刪除貼文（第1篇）Delete Post
+DELETE http://localhost:3001/api/posts/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidGVzdHVzZXIiLCJpYXQiOjE3NDQ5NjE0NDIsImV4cCI6MTc0NTA0Nzg0Mn0.pg0RevkW5Ki-zTqMqkJJs2gY7bEjBY8PLRBL9zfYYMs
