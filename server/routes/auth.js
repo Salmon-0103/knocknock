@@ -53,4 +53,22 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// 取得當前使用者
+// routes/auth.js
+const auth = require('../middleware/auth');
+
+router.get('/me', auth, async (req, res) => {
+  try {
+    const [[user]] = await pool.query(`
+      SELECT id, username, email, avatar_url AS avatarUrl, created_at AS createdAt
+      FROM users WHERE id = ?
+    `, [req.user.id]);
+    res.json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: '取得當前使用者失敗' });
+  }
+});
+
+
 module.exports = router;
