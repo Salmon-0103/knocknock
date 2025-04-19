@@ -70,5 +70,25 @@ router.delete('/:commentId', auth, async (req, res) => {
     }
   });
 
+// 取得使用者發過的所有留言
+// routes/users.js
+router.get('/:id/comments', async (req, res) => {
+  const userId = req.params.id;
+  try {
+    const [comments] = await pool.query(`
+      SELECT c.id, c.content, c.created_at AS createdAt, c.post_id AS postId,
+             p.title AS postTitle
+      FROM comments c
+      JOIN posts p ON c.post_id = p.id
+      WHERE c.user_id = ?
+      ORDER BY c.created_at DESC
+    `, [userId]);
+    res.json(comments);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: '取得留言失敗' });
+  }
+});
+
 
 module.exports = router;
