@@ -25,7 +25,7 @@ export default function PostDetail() {
       .catch(err => console.error('取得貼文失敗:', err));
 
     // 抓取使用者是否已按讚
-    const token = localStorage.getItem('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidGVzdHVzZXIiLCJpYXQiOjE3NDQ5NjE0NDIsImV4cCI6MTc0NTA0Nzg0Mn0.pg0RevkW5Ki-zTqMqkJJs2gY7bEjBY8PLRBL9zfYYMs');
+    const token = localStorage.getItem('token');
     if (token) {
       axios.get(`http://localhost:3001/api/posts/${id}/likes`, {
         headers: { Authorization: `Bearer ${token}` }
