@@ -128,4 +128,29 @@ router.delete('/:id', auth, async (req, res) => {
   }
 });
 
+// 搜尋貼文(標題、內文有關鍵字)
+// routes/posts.js
+router.get('/search', async (req, res) => {
+  const keyword = req.query.keyword;
+  if (!keyword) return res.status(400).json({ error: '請提供搜尋關鍵字' });
+
+  try {
+    const [results] = await pool.query(`
+      SELECT p.id, p.title, p.content, p.image_url AS imageUrl,
+             p.created_at AS createdAt,
+             u.id AS authorId, u.username AS author
+      FROM posts p
+      JOIN users u ON p.user_id = u.id
+      WHERE p.title LIKE ? OR p.content LIKE ?
+      ORDER BY p.created_at DESC
+    `, [`%${keyword}%`, `%${keyword}%`]);
+
+    res.json(results);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: '搜尋貼文失敗' });
+  }
+});
+
+
 module.exports = router;
