@@ -27,7 +27,7 @@ export default function MyPage() {
 
 	return (
 		<div className="container py-5">
-			<h2>👤 我的資訊</h2>
+			<h2>使用者資訊</h2>
 			<p>
 				<strong>名稱：</strong> {user.username}
 			</p>
