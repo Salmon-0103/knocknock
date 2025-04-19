@@ -86,18 +86,40 @@ export default function PostDetail() {
 		}
 	};
 
+	const handleDelete = async () => {
+		if (!confirm('確定要刪除這篇貼文嗎？')) return;
+		try {
+			const token = localStorage.getItem('token');
+			await axios.delete(`http://localhost:3001/api/posts/${post.id}`, {
+				headers: { Authorization: `Bearer ${token}` },
+			});
+			alert('刪除成功！');
+			router.push('/');
+		} catch (err) {
+			console.error(err);
+			alert('刪除失敗');
+		}
+	};
+
 	if (!post) return <div className="container py-5">載入中...</div>;
 
 	return (
 		<div className="container py-5">
 			{user?.id === post.authorId && (
-				<Link
-					href={`/posts/${post.id}/edit`}
-					className="btn btn-sm btn-outline-primary me-2"
-				>
-					✏️ 編輯
-				</Link>
+				<div className="mb-3">
+					<Link
+						href={`/posts/${post.id}/edit`}
+						className="btn btn-sm btn-outline-primary me-2"
+					>
+						✏️ 編輯
+					</Link>
+					<br></br>
+					<button className="btn btn-sm btn-outline-danger" onClick={handleDelete}>
+						🗑 刪除
+					</button>
+				</div>
 			)}
+
 			<h2>{post.title}</h2>
 			<p>{post.content}</p>
 			<p className="text-muted small">
