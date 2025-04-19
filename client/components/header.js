@@ -14,15 +14,17 @@ export default function Header() {
 			<div className="ms-auto">
 				{user ? (
 					<>
-						<Link className="btn btn-outline-dark btn-sm me-2" href="/posts/addPost">
-							➕ 發文
-						</Link>
 						<Link className="btn btn-outline-secondary btn-sm me-2" href="/me">
 							Hi, {user.username}
 						</Link>
+						<br></br>
 						<button className="btn btn-outline-danger btn-sm" onClick={logout}>
 							登出
 						</button>
+						<br></br>
+						<Link className="btn btn-outline-dark btn-sm me-2" href="/posts/addPost">
+							有什麼新鮮事?
+						</Link>
 					</>
 				) : (
 					<>
